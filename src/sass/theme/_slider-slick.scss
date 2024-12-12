@@ -1,0 +1,55 @@
+.slick-prev {
+    left: $spacer;
+    z-index: 1;
+}
+
+.slick-next {
+    right: $spacer;
+}
+
+.slick-slider {
+
+    .entry-content {
+        max-width: 550px;
+    }
+}
+
+.hero-slider {
+
+    .slick-slide .wp-block-cover {
+        padding-top: 120px;
+    }
+}
+
+.slick-prev,
+.slick-next {
+    width: 2rem;
+    height: 2rem;
+
+    &:before {
+        color: $secondary;
+        font-size: 2rem;
+    }
+}
+
+.slick-product-slider {
+
+    .slick-prev,
+    .slick-next {
+        top: $spacer;
+        transform: none;
+
+        &::before {
+            line-height: 1;
+        }
+    }
+
+    .slick-prev {
+        right: calc( #{$spacer*2} + 2rem );
+        left: unset;
+    }
+    .slick-next {
+        right: $spacer;
+    }
+    
+}

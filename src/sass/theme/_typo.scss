@@ -1,0 +1,109 @@
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  font-family: $font-family-serif;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.has-large-font-size,
+.has-huge-font-size,
+.has-x-large-font-size {
+  line-height: 1;
+}
+
+em {
+  font-family: $font-family-serif;
+}
+
+p.entry-title,
+h2.entry-title {
+  text-transform: uppercase;
+  font-size: $lead-font-size; 
+}
+
+.texto-destacado {
+    display: inline-block;  
+    margin-bottom: .5rem;
+    background-color: #6c757d;
+    color: #fff;
+    z-index: 10;
+    padding: .15rem .5rem;
+    font-size: .8rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    max-width: 90%;
+}
+
+h2.widgettitle { font-size: 1.1rem;}
+label {font-size: .7rem;}
+a.no-underline {text-decoration: none !important;}
+a:hover img {opacity: .8;}
+.text-light a {color: #fff;}
+.text-light a:hover {color: #ccc;}
+ul { list-style-type: circle; }
+
+.description-more-info {
+	font-size: 1.1rem;
+	font-weight: 400;
+}
+.description-more-info i {
+	transition: transform .8s;
+}
+.description-more-info[aria-expanded="true"] i.girar {
+	transform: rotate(180deg);
+}
+.link {
+    cursor: pointer;
+    font-weight: 400;
+    text-decoration: none;
+  }
+  
+
+.breadcrumb {
+    justify-content: flex-end;
+    text-align: right;
+}
+.subtitulo-pagina {font-size: 1.6rem;}
+  
+
+  .medidas {
+
+  }
+  article.term h2 {
+    font-size: 1.3rem;
+  }
+  .term-half .subtitulo-term {text-transform: none;}
+  .subtitulo-numero {font-size: 3em; font-weight: 700; position: absolute; top: 20px; left: 20px;}
+  
+  .excerpt {font-size: .85em; font-weight: 400;}
+  .entry-meta { 
+    margin-bottom: $paragraph-margin-bottom; 
+    text-transform: uppercase; 
+    font-size: $font-size-sm;
+    color: $text-muted;
+}
+  .tax-navigation a {font-weight: 400; font-size:.8rem;}
+.is-style-lined {
+    margin-bottom: 1em;
+    margin-top: 2em;
+    text-transform: uppercase;
+
+    display: flex;
+    align-items: center;
+
+    &:after {
+      content: "";
+      border-bottom: $border-width solid $border-color;
+      width: 100%;
+      margin-left: $spacer;
+    }
+}
+
+.wpcf7-form-control-wrap {
+  margin-bottom: .5rem;
+  display: block;
+}

@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Archivo';
+    src:    url('../fonts/Archivo-Regular.woff2') format('woff2'),
+            url('../fonts/Archivo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Archivo';
+    src:    url('../fonts/Archivo-Light.woff2') format('woff2'),
+            url('../fonts/Archivo-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Archivo';
+    src:    url('../fonts/Archivo-Bold.woff2') format('woff2'),
+            url('../fonts/Archivo-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+// @font-face {
+//     font-family: 'Fraunces';
+//     src:    url('../fonts/Fraunces72pt-Light.woff2') format('woff2'),
+//             url('../fonts/Fraunces72pt-Light.woff') format('woff');
+//     font-weight: normal;
+//     font-style: normal;
+// }
+
+@font-face {
+    font-family: 'Argesta';
+    src: url('../fonts/argestatext-regular-webfont.eot');
+    src: url('../fonts/argestatext-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/argestatext-regular-webfont.woff2') format('woff2'),
+         url('../fonts/argestatext-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Argesta';
+    src: url('../fonts/argestatext-regularitalic-webfont.eot');
+    src: url('../fonts/argestatext-regularitalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/argestatext-regularitalic-webfont.woff2') format('woff2'),
+         url('../fonts/argestatext-regularitalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}

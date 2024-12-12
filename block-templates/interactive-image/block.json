@@ -1,0 +1,11 @@
+{
+    "name": "acf/interactive-image",
+    "title": "Imagen interactiva",
+    "category": "media",
+    "icon": "editor-ul",
+    "keywords": ["tooltip"],
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "interactive-image.php"
+    }
+}
