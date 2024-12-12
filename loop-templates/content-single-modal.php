@@ -49,7 +49,7 @@ $opciones_productos = postmeta_variable($post_meta, 'opciones_de_producto');
 $acabados = postmeta_variable($post_meta, 'acabados_aperturas');
 $acabados_terms = postmeta_variable($post_meta, 'acabados_aperturas_term');
 if ($acabados_terms) {
-	$acabados_terms_meta = get_posts(array(
+	$acabados_terms_posts = get_posts(array(
 		'post_type' => 'any',
 		'tax_query' => array(
 			array(
@@ -62,9 +62,13 @@ if ($acabados_terms) {
 		'posts_per_page' => -1,
 	));
 
-	foreach ($acabados_terms_meta as $term_meta) {
-		$acabados[] = $term_meta->ID;
+	foreach ($acabados_terms_posts as $a) {
+		$acabados[] = $a->ID;
 	}
+}
+
+if ( $acabados ) {
+	$acabados = array_unique($acabados);
 }
 
 $url_simulador = postmeta_variable($post_meta, 'url_simulador');
