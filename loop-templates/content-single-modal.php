@@ -52,29 +52,28 @@ if ( !$acabados ) {
 }
 $acabados_terms = postmeta_variable($post_meta, 'acabados_aperturas_term');
 if ($acabados_terms) {
-	$acabados_terms_posts = get_posts(array(
-		'post_type' => 'any',
+	$acabados_terms_posts_args = array(
+		'post_type' => 'producto',
+		'fields'	=> 'ids',
 		'tax_query' => array(
 			array(
 				'taxonomy' => 'categoria_producto',
-				'field' => 'term_id',
 				'terms' => $acabados_terms,
-				'operator' => 'IN',
 			),
 		),
 		'posts_per_page' => -1,
-	));
+	);
 
-	foreach ($acabados_terms_posts as $a) {
-		$acabados[] = $a->ID;
-	}
+	$acabados_terms_posts = new WP_Query($acabados_terms_posts_args);
+	$acabados = array_merge( $acabados, $acabados_terms_posts->posts );
+
 }
 
 if ( current_user_can( 'manage_options' ) ) :
 	echo '<pre>test1';
 		print_r ( $acabados );
 		print_r ( $acabados_terms );
-		print_r ( $acabados_terms_posts );
+		print_r ( $acabados_terms_posts->posts );
 	echo '</pre>';
 endif;
 
