@@ -47,6 +47,9 @@ $alto_hasta = postmeta_variable($post_meta, 'alto_hasta');
 $fondo_hasta = postmeta_variable($post_meta, 'fondo_hasta');
 $opciones_productos = postmeta_variable($post_meta, 'opciones_de_producto');
 $acabados = postmeta_variable($post_meta, 'acabados_aperturas');
+if ( !$acabados ) {
+	$acabados = array();
+}
 $acabados_terms = postmeta_variable($post_meta, 'acabados_aperturas_term');
 if ($acabados_terms) {
 	$acabados_terms_posts = get_posts(array(
