@@ -70,6 +70,14 @@ if ($acabados_terms) {
 	}
 }
 
+if ( current_user_can( 'manage_options' ) ) :
+	echo '<pre>test1';
+		print_r ( $acabados );
+		print_r ( $acabados_terms );
+		print_r ( $acabados_terms_posts );
+	echo '</pre>';
+endif;
+
 if ( $acabados ) {
 	$acabados = array_unique($acabados);
 }
