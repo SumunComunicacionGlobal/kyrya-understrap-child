@@ -325,6 +325,9 @@ function opciones_de_producto( $opciones = array() ) {
     }   
     
     if (!empty($opciones)) {
+
+        $placeholder_url = get_stylesheet_directory_uri() . '/img/favicon-kyrya.png';
+
         $r .= '<div class="opciones-producto">';
 
         foreach ( $opciones as $original_opcion_id ) {
@@ -335,8 +338,9 @@ function opciones_de_producto( $opciones = array() ) {
                 if (has_post_thumbnail($original_opcion_id)) {
                     $r .= get_the_post_thumbnail( $original_opcion_id, 'post-thumbnail', array( 'title' => get_the_title( $opcion_id ) ) );
                 } else {
-                    $placeholder_id = 30;
-                    $r .= wp_get_attachment_image( $placeholder_id, 'thumbnail', false, array( 'title' => get_the_title( $opcion_id ) ) );
+                    // $placeholder_id = 30;
+                    // $r .= wp_get_attachment_image( $placeholder_id, 'thumbnail', false, array( 'title' => get_the_title( $opcion_id ) ) );
+                    $r .= '<img class="opacity-25" src="'.$placeholder_url.'" alt="'.get_the_title( $opcion_id ).'" title="'.get_the_title( $opcion_id ).'">';
                 }
 
                 $r .= '<div class="titulo-opcion">'.get_the_title( $opcion_id ).'</div>';

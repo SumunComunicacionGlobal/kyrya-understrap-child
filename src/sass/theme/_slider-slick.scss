@@ -1,3 +1,11 @@
+// .slick-track {
+//     display: flex !important;
+// }
+
+// .slick-slide {
+//     height: inherit !important;
+// }
+
 .slick-prev {
     left: $spacer;
     z-index: 1;
@@ -51,5 +59,30 @@
     .slick-next {
         right: $spacer;
     }
+
+    .slick-slide {
+
+        img {
+           height: 500px !important;
+           object-fit: contain;
+        }
+    }
     
+}
+
+.slick-dotted.slick-slider {
+    margin-bottom: 4rem;
+}
+
+.slick-dots {
+    bottom: -$spacer*3;
+    
+    li button {
+
+        &:before {
+            font-size: .75rem;
+            opacity: .1;
+        }
+        
+    }
 }

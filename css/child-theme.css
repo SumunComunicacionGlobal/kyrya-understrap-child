@@ -16402,6 +16402,23 @@ img.esquema-carrusel {
 .slick-product-slider .slick-next {
   right: 1rem;
 }
+.slick-product-slider .slick-slide img {
+  height: 500px !important;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+.slick-dotted.slick-slider {
+  margin-bottom: 4rem;
+}
+
+.slick-dots {
+  bottom: -3rem;
+}
+.slick-dots li button:before {
+  font-size: 0.75rem;
+  opacity: 0.1;
+}
 
 /* Tablas */
 table {

@@ -43,11 +43,37 @@ $ancestors = get_ancestors( $term->term_id, $term->taxonomy, 'taxonomy' );
 // echo $term->taxonomy;
 
 // if ( count($ancestors) > 0 ) $col_class = 'col-md-3';
+
+$link = get_term_link( $term );
+$title = $term->name;
+$modal_link = '';
+
+if (is_a($term, 'WP_Term')) {
+
+	$products = get_posts(array(
+		'post_type' => 'producto',
+		'tax_query' => array(
+			array(
+				'taxonomy' => $term->taxonomy,
+				'field'    => 'term_id',
+				'terms'    => $term->term_id,
+			),
+		),
+	));
+
+	if (count($products) == 1) {
+		$link = get_permalink($products[0]->ID);
+		$title = $products[0]->post_title;
+		$modal_link = 'modal-link';
+	}
+	
+}
+
 ?>
 
 <article class="box <?php echo $col_class; ?> subterm <?php echo $term->taxonomy . $aparecer; ?>" id="term-<?php echo $term->term_id; ?>">
 		<?php //if ($term->count > 0) : ?>
-		<a class="no-underline" href="<?php echo get_term_link( $term ); ?>" title="<?php echo $term->name; ?>">
+		<a class="no-underline <?php echo $modal_link; ?>" href="<?php echo $link; ?>" title="<?php echo $title; ?>">
 		<?php //endif; ?>
 			<div class="hover-zoom">
 				<div class="miniatura bg-cover" style="background-image:url('<?php echo $thumb_url; ?>');"></div>
