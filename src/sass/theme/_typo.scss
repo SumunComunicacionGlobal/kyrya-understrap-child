@@ -19,9 +19,17 @@ em {
   font-family: $font-family-serif;
 }
 
+body:not(.search) {
+
+  p.entry-title,
+  h2.entry-title {
+    text-transform: uppercase;
+  }
+
+}
+
 p.entry-title,
 h2.entry-title {
-  text-transform: uppercase;
   font-size: $lead-font-size; 
 }
 

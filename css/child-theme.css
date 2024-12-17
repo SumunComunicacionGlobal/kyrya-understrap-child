@@ -15551,6 +15551,11 @@ body.pt-pt .show-lang-pt-pt:is(span) {
   padding-top: 0.5rem;
 }
 
+.pagination {
+  justify-content: center;
+  margin-top: 3rem;
+}
+
 .has-blue-color,
 .has-blue-color:visited {
   color: #0d6efd;
@@ -16032,10 +16037,15 @@ em {
   font-family: "Argesta", "Fraunces", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+body:not(.search) p.entry-title,
+body:not(.search) h2.entry-title,
+body:not(.search) .entry-title.h2 {
+  text-transform: uppercase;
+}
+
 p.entry-title,
 h2.entry-title,
 .entry-title.h2 {
-  text-transform: uppercase;
   font-size: 1.25rem;
 }
 
