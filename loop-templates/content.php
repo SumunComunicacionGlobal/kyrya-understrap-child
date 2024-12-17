@@ -66,13 +66,16 @@ if (es_composicion($pt)) {
 	// $titulo = $descripcion;
 	$titulo = get_the_title();
 	$descripcion = ''; 
-} elseif ('' != get_post_field( 'post_excerpt', get_the_ID() ) ) {
-	$titulo = get_post_field( 'post_excerpt', get_the_ID() );
-	$titulo = do_shortcode( $titulo );
-	$descripcion = get_the_title();
+// } elseif ('' != get_post_field( 'post_excerpt', get_the_ID() ) ) {
+// 	$titulo = get_post_field( 'post_excerpt', get_the_ID() );
+// 	$titulo = do_shortcode( $titulo );
+// 	$descripcion = get_the_title();
+// } else {
+// 	$titulo = get_the_title();
+// 	$descripcion = '';
 } else {
 	$titulo = get_the_title();
-	$descripcion = '';
+	$descripcion = get_post_field( 'post_excerpt', get_the_ID() );
 }
 
 
