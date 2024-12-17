@@ -164,7 +164,9 @@ $mostrar_productos = true;
 						smn_subterm_buttons( $related_terms, $q_obj_trans );
 					// } elseif( empty($subterms) ) {
 					} else {
-						smn_subterm_buttons( $subterms, $q_obj_trans );
+						if ( have_posts() && !$mostrar_productos ) {
+							smn_subterm_buttons( $subterms, $q_obj_trans );
+						}
 					}
 				?>
 
