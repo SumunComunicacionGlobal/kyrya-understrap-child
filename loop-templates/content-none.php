@@ -43,7 +43,7 @@ defined( 'ABSPATH' ) || exit;
 
 			printf(
 				'<p>%s<p>',
-				esc_html__( '¿Buscabas algo en concreo? Utiliza el buscador.', 'kyrya' )
+				esc_html__( '¿Buscabas algo en concreto? Utiliza el buscador.', 'kyrya' )
 			);
 			get_search_form();
 
