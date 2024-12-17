@@ -367,8 +367,21 @@ function acabados($ids, $post_id = 0) {
 
     if ($ids) {
 
+        $texto_acabados = __( 'Acabados', 'kyrya' );
+
+        $terms = get_the_terms($post_id, 'categoria_producto');
+        if ($terms && !is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                $texto_acabados_term = get_field( 'texto_acabados', $term );
+                if ($texto_acabados_term) {
+                    $texto_acabados = $texto_acabados_term;
+                    break;
+                }
+            }
+        }
+
         $r .= '<hr>';
-        $r .= '<h6>' . __( 'Acabados', 'kyrya' ) . ':</h6>';
+        $r .= '<h6>' . $texto_acabados . ':</h6>';
         $r .= '<div class="acabados">';
 
         foreach ($ids as $id ) {
