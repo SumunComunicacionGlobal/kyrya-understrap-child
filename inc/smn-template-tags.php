@@ -105,10 +105,16 @@ function understrap_post_nav() {
 
 function smn_subterm_buttons( $subterms = array(), $term ) {
 
+	if ( $term->parent == 0 ) {
+		return false;
+	}
+
+	$r = '';
+
 	if (!empty($subterms)) { 
-		echo '<span class="btn btn-secondary mb-1 me-1">' . $term->name . '</span>';
+		$r .= '<span class="btn btn-secondary mb-1 me-1">' . $term->name . '</span>';
 		foreach ($subterms as $subterm) {
-			echo '<a class="btn btn-light mb-1 me-1" href="'.get_term_link( $subterm ).'">' . $subterm->name . '</a>';
+			$r .= '<a class="btn btn-light mb-1 me-1" href="'.get_term_link( $subterm ).'">' . $subterm->name . '</a>';
 		}
 	} else {
 
@@ -131,14 +137,20 @@ function smn_subterm_buttons( $subterms = array(), $term ) {
 
 			foreach ($sibling_terms as $subterm) {
 				if ( $subterm->term_id == $term->term_id ) {
-					echo '<span class="btn btn-secondary mb-1 me-1">' . $subterm->name . '</span>';
+					$r .= '<span class="btn btn-secondary mb-1 me-1">' . $subterm->name . '</span>';
 				} else {
-					echo '<a class="btn btn-light mb-1 me-1" href="'.get_term_link( $subterm ).'">' . $subterm->name . '</a>';
+					$r .= '<a class="btn btn-light mb-1 me-1" href="'.get_term_link( $subterm ).'">' . $subterm->name . '</a>';
 				}
 			}
 
 		}
 
+	}
+
+	if ( $r ) {
+		echo '<div class="subterms-buttons">';
+			echo $r;
+		echo '</div>';
 	}
 
 }
