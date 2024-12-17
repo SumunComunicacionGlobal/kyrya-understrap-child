@@ -105,10 +105,6 @@ function understrap_post_nav() {
 
 function smn_subterm_buttons( $subterms = array(), $term ) {
 
-	if ( $term->parent == 0 ) {
-		return false;
-	}
-
 	$r = '';
 
 	if (!empty($subterms)) { 
@@ -118,6 +114,10 @@ function smn_subterm_buttons( $subterms = array(), $term ) {
 		}
 	} else {
 
+		if ( $term->parent == 0 ) {
+			return false;
+		}
+	
 		// $q_obj = kyrya_default_language_term($q_obj_trans);
 
 		$args_sibling_terms = array(
