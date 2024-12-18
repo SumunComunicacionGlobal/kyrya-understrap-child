@@ -15496,6 +15496,10 @@ body.pt-pt .show-lang-pt-pt:is(span) {
   max-height: 40px;
 }
 
+#modal-ajax-post .modal-body {
+  min-height: 300px;
+}
+
 /* Blog */
 .error404 .widget {
   margin: 2em 0;

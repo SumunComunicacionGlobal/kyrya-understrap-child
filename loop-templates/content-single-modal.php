@@ -99,9 +99,11 @@ if ($galeria) {
 
 		<div class="mb-5 row">
 			<div class="col-md-6 col-lg-7">
-					<?php if ( count( $images ) > 1 ) { ?>
+					<?php if ( count( $images ) > 1 ) { 
+						$slider_unique_id = uniqid();
+						?>
 						
-						<div class="slick-product-slider">
+						<div class="slick-product-slider" id="<?php echo $slider_unique_id; ?>">
 								<?php
 									foreach ( $images as $image_id ) {
 										echo '<div class="slick-product-slide">';

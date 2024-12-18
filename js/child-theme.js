@@ -6846,15 +6846,6 @@
 	      $(this).html(newTextHtml);
 	    }
 	  });
-	  $('.aparecer').each(function (index) {
-	    var i = index + 1;
-	    var delay = 0.04;
-	    $(this).css('animation-delay', delay * i + 's');
-	  });
-	  $('.aparecer').addClass("hidden").viewportChecker({
-	    classToAdd: 'visible animated fadeInUp',
-	    offset: 100
-	  });
 	  var campoTipo = $('input[name="kt"]');
 	  var campoProducto = $('input[name="kn"]');
 	  if (campoProducto.length) {
@@ -6865,50 +6856,33 @@
 	      $('#consulta-sobre').hide();
 	    }
 	  }
-	  $(document).click(function (event) {
-	    var clickover = $(event.target);
-	    var _expanded = $("#navbar-toggler").attr("aria-expanded");
-	    // alert(_closed);
-	    if (_expanded === 'true' && !clickover.hasClass("navbar-toggler") && !clickover.hasClass("nav-link") && !clickover.hasClass("form-control")) {
-	      $("#navbar-toggler").click();
-	    }
-	  });
-
-	  // Close modal 
-	  $('.close-modal').click(function () {
-	    $('.modal').toggleClass('show');
-	  });
 
 	  // Detect windows width function
 	  var $window = $(window);
+	  const spinner = '<div class="text-center my-5"><div class="spinner-grow text-secondary" role="status"><span class="visually-hidden">Loading...</span></div></div>';
 	  function checkWidth() {
 	    var windowsize = $window.width();
 	    if (windowsize > 767) {
-	      // alert(windowsize);
 	      // if the window is greater than 767px wide then do below. we don't want the modal to show on mobile devices and instead the link will be followed.
 
 	      $(".modal-link").click(function (e) {
+	        e.preventDefault();
 	        $("#modal-ajax-post").modal("show");
 	        var modalContent = $("#modal-ajax-post .modal-body");
-	        // var modalContent = $("#modal-body");
-
-	        // var post_link = $('.show-in-modal').html(); // get content to show in modal
 	        var post_link = $(this).attr("href"); // this can be used in WordPress and it will pull the content of the page in the href
 
-	        e.preventDefault(); // prevent link from being followed
-
-	        $('.modal').addClass('show', 1000, "easeOutSine"); // show class to display the previously hidden modal
-	        modalContent.html("loading..."); // display loading animation or in this case static content
-	        // modalContent.html(post_link); // for dynamic content, change this to use the load() function instead of html() -- like this: modalContent.load(post_link + ' #modal-ready')
+	        modalContent.html(spinner); // display loading animation or in this case static content
 	        modalContent.load(post_link + ' #modal-ready', function () {
-	          // modalContent.load(post_link, function() {
-
-	          var base_url = window.location.origin;
-	          if (base_url.includes("localhost") || base_url.includes("viral.sumun.net")) {
-	            base_url += "/kyrya";
-	          }
-	          // $.getScript( base_url + "/wp-content/themes/kyrya/js/carousel-thumbnails.js");
-	          $.getScript(base_url + "/wp-content/themes/kyrya-understrap-child/js/child-theme.min.js");
+	          $('.slick-product-slider').slick({
+	            infinite: true,
+	            slidesToShow: 1,
+	            slidesToScroll: 1,
+	            autoplay: true,
+	            autoplaySpeed: 10000,
+	            arrows: true,
+	            dots: true,
+	            adaptiveHeight: true
+	          });
 	        });
 	      });
 	    }

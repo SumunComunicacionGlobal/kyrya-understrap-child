@@ -414,6 +414,9 @@ body.pt-pt .show-lang-pt-pt {
   .modal-lg {max-width: 1200px;}
 .modal .close {font-size: 2.5rem; font-weight: 300;}
 .modal-title img { max-height: 40px;}
+#modal-ajax-post .modal-body {
+  min-height: 300px;
+}
 
 /* Blog */
 .error404 .widget {
