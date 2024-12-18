@@ -15230,7 +15230,8 @@ article.hentry .hover-zoom .miniatura {
   max-width: 230px;
 }
 
-.hover-zoom:hover .miniatura {
+.hover-zoom:hover .miniatura,
+.stretch-linked-block:hover .hover-zoom .miniatura {
   /*background-size: auto 100%;*/
   transform: scale(1.1);
   z-index: 2;
@@ -15535,6 +15536,11 @@ body.pt-pt .show-lang-pt-pt:is(span) {
   position: fixed;
   right: 20px;
   bottom: 0;
+}
+
+.stretch-linked-block {
+  position: relative;
+  cursor: pointer;
 }
 
 .stretched-link:after {

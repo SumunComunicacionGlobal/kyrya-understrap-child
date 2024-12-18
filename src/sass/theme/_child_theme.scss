@@ -239,7 +239,8 @@
 }
 
 .logo-miniatura { max-width: 230px;}
-.hover-zoom:hover .miniatura {
+.hover-zoom:hover .miniatura,
+.stretch-linked-block:hover .hover-zoom .miniatura {
     /*background-size: auto 100%;*/
     transform:scale(1.1);
     z-index: 2;
@@ -449,6 +450,11 @@ body.pt-pt .show-lang-pt-pt {
 
 .btn-primary.search-submit {
     @extend .btn-secondary;
+}
+
+.stretch-linked-block {
+  position: relative;
+  cursor: pointer;
 }
 
 .stretched-link {
