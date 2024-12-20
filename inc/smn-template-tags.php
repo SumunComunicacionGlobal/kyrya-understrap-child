@@ -103,7 +103,7 @@ function understrap_post_nav() {
 	return false;
 }
 
-function smn_subterm_buttons( $subterms = array(), $term ) {
+function smn_subterm_buttons( $subterms = array(), $term = null ) {
 
 	$r = '';
 

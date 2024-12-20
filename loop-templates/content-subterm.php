@@ -12,9 +12,13 @@ $post_meta = get_term_meta( $term->term_id );
 //echo '<pre>pm2'; print_r(get_term_meta( $term->term_id )); echo '</pre>';
 $default_term = kyrya_default_language_term($term);
 //$default_post_meta = get_fields( $default_term );
-$default_post_meta = get_term_meta( $default_term->term_id );
+if ( $default_term && !is_wp_error($default_term) ) {
 
-$post_meta = array_merge($default_post_meta, $post_meta);
+	$default_post_meta = get_term_meta( $default_term->term_id );
+	$post_meta = array_merge($default_post_meta, $post_meta);
+
+}
+
 $aparecer = ' aparecer';
 
 // $logo = (isset($post_meta['logo'])) ? $post_meta['logo'][0] : '';
