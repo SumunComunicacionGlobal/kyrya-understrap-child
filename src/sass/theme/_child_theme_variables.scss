@@ -418,7 +418,8 @@ $link-hover-color:                        shift-color($link-color, $link-shade-p
 $link-hover-decoration:                   null !default;
 
 $stretched-link-pseudo-element:           after !default;
-$stretched-link-z-index:                  1 !default;
+// $stretched-link-z-index:                  1 !default;
+$stretched-link-z-index:                  2;
 
 // Paragraphs
 //
