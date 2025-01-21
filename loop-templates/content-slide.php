@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<div <?php post_class( 'wp-block-cover px-5 alignfull' ); ?> id="post-<?php the_ID(); ?>">
 
-		<span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-70 has-background-dim"></span>
+		<span aria-hidden="true" class="wp-block-cover__background has-primary-background-color has-background-dim-30 has-background-dim"></span>
 
 		<?php the_post_thumbnail( 'full', array( 'class' => 'wp-block-cover__image-background' ) ); ?>
 

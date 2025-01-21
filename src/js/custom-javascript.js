@@ -83,6 +83,16 @@ jQuery(document).ready(function($) {
 
     });
 
+    $('.hero-slider').slick({
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 6000,
+      arrows: true,
+      dots: false,
+    });
+  
     $('.slick-slider').slick({
       infinite: true,
       slidesToShow: 1,

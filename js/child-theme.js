@@ -1,6 +1,6 @@
 /*!
   * Understrap v1.2.0 (https://understrap.com)
-  * Copyright 2013-2024 The Understrap Authors (https://github.com/understrap/understrap/graphs/contributors)
+  * Copyright 2013-2025 The Understrap Authors (https://github.com/understrap/understrap/graphs/contributors)
   * Licensed under GPL-3.0 (undefined)
   */
 (function (global, factory) {
@@ -6808,6 +6808,15 @@
 
 	    $(".carousel-indicators li.active").removeClass("active");
 	    $(".carousel-indicators li").eq(slideToId).addClass("active");
+	  });
+	  $('.hero-slider').slick({
+	    infinite: true,
+	    slidesToShow: 1,
+	    slidesToScroll: 1,
+	    autoplay: true,
+	    autoplaySpeed: 6000,
+	    arrows: true,
+	    dots: false
 	  });
 	  $('.slick-slider').slick({
 	    infinite: true,
