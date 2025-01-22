@@ -135,68 +135,70 @@ if ($galeria) {
 				<div class="entry-content">
 					<?php edit_post_link(); ?>
 					<?php if (current_user_can( 'edit_posts' )) echo ' / <a href="'.get_the_permalink().'" target="_blank">Ver en nueva pestaña</a>'; ?>
-					<p class="dimensiones">
-						<?php 
+					
+					<?php
+					// echo '<p class="dimensiones">';
 
-						$medidas_class = 'medidas mb-1';
-						$dimensiones_array = array(
-							[
-								'slug' 			=> 'medidas',
-								'label'			=> __( 'Medidas', 'kyrya' ),
-								'value'			=> $medidas,
-								'class'			=> 'icono ruler me-3'
-							],
-							[
-								'slug' 			=> 'diametro',
-								'label'			=> __( 'Ø', 'kyrya' ),
-								'value'			=> $diametro,
-								'class'			=> ''
-							],
-							[
-								'slug' 			=> 'ancho',
-								'label'			=> __( 'Ancho', 'kyrya' ),
-								'value'			=> $ancho,
-								'class'			=> ''
-							],
-							[
-								'slug' 			=> 'alto',
-								'label'			=> __( 'Alto', 'kyrya' ),
-								'value'			=> $alto,
-								'class'			=> ''
-							],
-							[
-								'slug' 			=> 'fondo',
-								'label'			=> __( 'Fondo', 'kyrya' ),
-								'value'			=> $fondo,
-								'class'			=> ''
-							],
-							[
-								'slug' 			=> 'ancho_hasta',
-								'label'			=> __( 'Ancho hasta', 'kyrya' ),
-								'value'			=> $ancho_hasta,
-								'class'			=> ''
-							],
-							[
-								'slug' 			=> 'alto_hasta',
-								'label'			=> __( 'Alto hasta', 'kyrya' ),
-								'value'			=> $alto_hasta,
-								'class'			=> ''
-							],
-							[
-								'slug' 			=> 'fondo_hasta',
-								'label'			=> __( 'Fondo hasta', 'kyrya' ),
-								'value'			=> $fondo_hasta,
-								'class'			=> ''
-							],
-						);
+					// 	$medidas_class = 'medidas mb-1';
+					// 	$dimensiones_array = array(
+					// 		[
+					// 			'slug' 			=> 'medidas',
+					// 			'label'			=> __( 'Medidas', 'kyrya' ),
+					// 			'value'			=> $medidas,
+					// 			'class'			=> 'icono ruler me-3'
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'diametro',
+					// 			'label'			=> __( 'Ø', 'kyrya' ),
+					// 			'value'			=> $diametro,
+					// 			'class'			=> ''
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'ancho',
+					// 			'label'			=> __( 'Ancho', 'kyrya' ),
+					// 			'value'			=> $ancho,
+					// 			'class'			=> ''
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'alto',
+					// 			'label'			=> __( 'Alto', 'kyrya' ),
+					// 			'value'			=> $alto,
+					// 			'class'			=> ''
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'fondo',
+					// 			'label'			=> __( 'Fondo', 'kyrya' ),
+					// 			'value'			=> $fondo,
+					// 			'class'			=> ''
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'ancho_hasta',
+					// 			'label'			=> __( 'Ancho hasta', 'kyrya' ),
+					// 			'value'			=> $ancho_hasta,
+					// 			'class'			=> ''
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'alto_hasta',
+					// 			'label'			=> __( 'Alto hasta', 'kyrya' ),
+					// 			'value'			=> $alto_hasta,
+					// 			'class'			=> ''
+					// 		],
+					// 		[
+					// 			'slug' 			=> 'fondo_hasta',
+					// 			'label'			=> __( 'Fondo hasta', 'kyrya' ),
+					// 			'value'			=> $fondo_hasta,
+					// 			'class'			=> ''
+					// 		],
+					// 	);
 
-						foreach ($dimensiones_array as $dimension) {
-							if ($dimension['value']) {
-								echo '<p class="'. $medidas_class . ' ' . $dimension['class'] .'"><span class="medidas-label fw-bold">'. $dimension['label'] . ': </span>' . $dimension['value'].'</p>';
-							}
-						}
-						?>
-					</p>
+					// 	foreach ($dimensiones_array as $dimension) {
+					// 		if ($dimension['value']) {
+					// 			echo '<p class="'. $medidas_class . ' ' . $dimension['class'] .'"><span class="medidas-label fw-bold">'. $dimension['label'] . ': </span>' . $dimension['value'].'</p>';
+					// 		}
+					// 	}
+
+					// echo '</p>';
+					?>
 
 					<?php if ( $url_simulador ) {
 						echo wpautop( '<a class="btn btn-secondary" href="'. $url_simulador .'" target="_blank" rel="noopener noreferrer">'. __( 'Ver simulador', 'kyrya' ) .'</a>' );

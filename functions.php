@@ -417,6 +417,7 @@ function acabados($ids, $post_id = 0) {
     echo $r;
 }
 
+
 function get_tax_navigation( $taxonomy = 'category', $direction = '' ) {
     // Make sure we are on a taxonomy term/category/tag archive page, if not, bail
     if ( 'category' === $taxonomy ) {
