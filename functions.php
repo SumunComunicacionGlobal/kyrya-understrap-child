@@ -41,6 +41,7 @@ $understrap_includes = array(
     '/smn-template-tags.php',
     '/smn-shortcodes.php',
     '/smn-blocks.php',
+    '/smn-zoho-campaigns.php',
 );
 
 // Load WooCommerce functions if WooCommerce is activated.
