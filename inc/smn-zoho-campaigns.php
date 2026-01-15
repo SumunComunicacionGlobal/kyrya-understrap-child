@@ -36,15 +36,12 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	$country = isset($data['your-country-subscription-form']) ? $data['your-country-subscription-form'] : '';
 
 	$api_url = 'https://campaigns.zoho.eu/api/v1.1/json/listsubscribe';
-	$list_key = '3zde37ebedb5f766fd0e01b95150311c2b7a622a5b9e9133bb67f990af679ef21a';
+	$list_key = get_field('zoho_campaigns_list_key', 'option');
 
 	// OAuth 2.0: obtener access token usando auth code (debes guardar el refresh_token, client_id y client_secret en las opciones del tema)
 	$client_id = get_field('zoho_campaigns_client_id', 'option');
-    $client_id = '1000.UX3MT88Q3DR80CWGL39C9VK3M88TEZ';
 	$client_secret = get_field('zoho_campaigns_client_secret', 'option');
-    $client_secret = '75585dd867bcd4fe2e043a28f0bd358122eaec6702';
 	$refresh_token = get_field('zoho_campaigns_refresh_token', 'option');
-    $refresh_token = '1000.d5af39181cdac19c7a4f4381eb49917f.d551260b66a793cd649af92feeef1592';
 	$access_token = smn_zoho_get_access_token($client_id, $client_secret, $refresh_token);
 	if (!$access_token) {
 		// error_log('Zoho: No se pudo obtener access token');
