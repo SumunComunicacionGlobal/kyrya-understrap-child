@@ -61,8 +61,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	$args = array(
 		'body' => $payload,
 		'headers' => array(
-			// 'Content-Type' => 'application/x-www-form-urlencoded',
-            // No pongas Content-Type, WP lo pone automáticamente para form-data
+			'Content-Type' => 'application/x-www-form-urlencoded',
 			'Authorization' => 'Zoho-oauthtoken ' . $access_token
 		),
 		'timeout' => 15
