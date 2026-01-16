@@ -34,7 +34,9 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 
 	if (!$is_target_form) {
 	    // Solo enviar si tiene optin y está marcado
-	    if (empty($data['optin'])) {
+	    if (!empty($data['optin'])) {
+            error_log('Zoho: El formulario no es el objetivo, pero tiene opt-in marcado.');
+        } else {
 	        error_log('Zoho: El formulario no tiene el campo de opt-in marcado.');
 	        return;
 	    }
