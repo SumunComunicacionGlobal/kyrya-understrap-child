@@ -44,7 +44,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	$refresh_token = get_field('zoho_campaigns_refresh_token', 'option');
 	$access_token = smn_zoho_get_access_token($client_id, $client_secret, $refresh_token);
 	if (!$access_token) {
-		// error_log('Zoho: No se pudo obtener access token');
+		error_log('Zoho: No se pudo obtener access token');
 		return;
 	}
 
@@ -68,7 +68,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	);
 
 	$response = wp_remote_post($api_url, $args);
-	// error_log(print_r($response, true));
+	error_log(print_r($response, true));
 }
 
 /**
@@ -92,7 +92,7 @@ function smn_zoho_get_access_token($client_id, $client_secret, $refresh_token) {
 		'timeout' => 15,
 	));
 	if (is_wp_error($response)) {
-		// error_log('Zoho token error: ' . $response->get_error_message());
+		error_log('Zoho token error: ' . $response->get_error_message());
 		return false;
 	}
 	$body = json_decode(wp_remote_retrieve_body($response), true);
@@ -100,6 +100,6 @@ function smn_zoho_get_access_token($client_id, $client_secret, $refresh_token) {
 		set_transient($transient_key, $body['access_token'], 3300); // 55 min
 		return $body['access_token'];
 	}
-	// error_log('Zoho token response: ' . print_r($body, true));
+	error_log('Zoho token response: ' . print_r($body, true));
 	return false;
 }
