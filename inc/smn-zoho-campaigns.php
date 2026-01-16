@@ -68,7 +68,9 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	);
 
 	$response = wp_remote_post($api_url, $args);
-	error_log(print_r($response, true));
+	error_log('Zoho response: ' . print_r($response, true));
+	$body = wp_remote_retrieve_body($response);
+	error_log('Zoho body: ' . $body);
 }
 
 /**
