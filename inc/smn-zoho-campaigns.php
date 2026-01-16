@@ -48,6 +48,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
     error_log('Zoho client secret: ' . $client_secret);
     error_log('Zoho refresh token: ' . $refresh_token);
     error_log('Zoho access token: ' . $access_token);
+    error_log('Zoho list key: ' . $list_key);
 
 	if (!$access_token) {
 		error_log('Zoho: No se pudo obtener access token');
