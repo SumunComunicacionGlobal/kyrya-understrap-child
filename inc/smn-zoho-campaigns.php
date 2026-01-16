@@ -66,7 +66,8 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
         if (isset($data['your-profile']) && !empty($data['your-profile'])) {
             $job_title = $data['your-profile'];
             // remove [" and "] if present
-            $job_title = str_replace(array('["', '"]'), '', $job_title);
+            // $job_title = str_replace(array('["', '"]'), '', $job_title);
+            $job_title = implode(', ', $job_title);
             $contact_info['Job Title'] = $job_title;
         }
         if (isset($data['your-company']) && !empty($data['your-company'])) {
