@@ -25,6 +25,9 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 		return;
 	}
 
+    $source_name = $contact_form->title();
+    error_log('Zoho: Enviando lead desde el formulario: ' . $source_name);
+
 	$submission = WPCF7_Submission::get_instance();
 	if (!$submission) {
 		return;
@@ -59,10 +62,11 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 		'listkey' => $list_key,
 		'contactinfo' => json_encode(array(
 			'First Name' => $first_name,
-			'Email' => $email,
+			'Contact Email' => $email,
 			'Country' => $country
 		)),
-		'resfmt' => 'JSON'
+		'resfmt' => 'JSON',
+        'source' => $source_name
 	);
 
 	$args = array(
