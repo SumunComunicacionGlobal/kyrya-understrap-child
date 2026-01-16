@@ -47,7 +47,38 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 
 	$first_name = isset($data['your-name']) ? $data['your-name'] : '';
 	$email = isset($data['your-email']) ? $data['your-email'] : '';
-	$country = isset($data['your-country-subscription-form']) ? $data['your-country-subscription-form'] : '';
+
+    // Construir el array contactinfo
+    $contact_info = array(
+        'First Name' => $first_name,
+        'Contact Email' => $email,
+    );
+
+
+    if ( $is_target_form ) {
+	    $country = isset($data['your-country-subscription-form']) ? $data['your-country-subscription-form'] : '';
+    } else {
+        $country = isset($data['your-country']) ? $data['your-country'] : '';
+
+        if ( isset($data['your-phone']) && !empty($data['your-phone']) ) {
+            $contact_info['Phone'] = $data['your-phone'];
+        }
+        if (isset($data['your-profile']) && !empty($data['your-profile'])) {
+            $contact_info['Job Title'] = $data['your-profile'];
+        }
+        if (isset($data['your-company']) && !empty($data['your-company'])) {
+            $contact_info['Company Name'] = $data['your-company'];
+        }
+        if (isset($data['your-city']) && !empty($data['your-city'])) {
+            $contact_info['City'] = $data['your-city'];
+        }
+        if (isset($data['your-message']) && !empty($data['your-message'])) {
+            $contact_info['Note'] = $data['your-message'];
+        }
+
+    }
+
+    $contact_info['Country'] = $country;
 
 	$api_url = 'https://campaigns.zoho.eu/api/v1.1/json/listsubscribe';
 	$list_key = get_field('zoho_campaigns_list_key', 'option');
@@ -71,11 +102,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 
 	$payload = array(
 		'listkey' => $list_key,
-		'contactinfo' => json_encode(array(
-			'First Name' => $first_name,
-			'Contact Email' => $email,
-			'Country' => $country
-		)),
+		'contactinfo' => json_encode($contact_info),
 		'resfmt' => 'JSON',
         'source' => $source_name
 	);
