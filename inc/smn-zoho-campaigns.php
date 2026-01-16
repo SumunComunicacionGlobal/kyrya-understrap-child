@@ -8,7 +8,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 add_action('wpcf7_mail_sent', 'smn_send_lead_to_zoho_campaigns');
 function smn_send_lead_to_zoho_campaigns($contact_form) {
+
+    $submission = WPCF7_Submission::get_instance();
+    if (!$submission) {
+        return;
+    }
+    $data = $submission->get_posted_data();
+
 	$target_form_id = 57056;
+    
 	// Obtener todas las traducciones del formulario con WPML
 	if (function_exists('wpml_object_id_filter')) {
 		$form_ids = array();
@@ -21,18 +29,19 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	}
 
 	$current_form_id = $contact_form->id();
-	if (!in_array($current_form_id, $form_ids)) {
-		return;
+
+	$is_target_form = in_array($current_form_id, $form_ids);
+
+	if (!$is_target_form) {
+	    // Solo enviar si tiene optin y está marcado
+	    if (empty($data['optin'])) {
+	        error_log('Zoho: El formulario no tiene el campo de opt-in marcado.');
+	        return;
+	    }
 	}
 
-    $source_name = $contact_form->title();
+    $source_name = 'Formularios web - ' . $contact_form->title();
     error_log('Zoho: Enviando lead desde el formulario: ' . $source_name);
-
-	$submission = WPCF7_Submission::get_instance();
-	if (!$submission) {
-		return;
-	}
-	$data = $submission->get_posted_data();
 
 	$first_name = isset($data['your-name']) ? $data['your-name'] : '';
 	$email = isset($data['your-email']) ? $data['your-email'] : '';
@@ -47,11 +56,11 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	$refresh_token = get_field('zoho_campaigns_refresh_token', 'option');
 	$access_token = smn_zoho_get_access_token($client_id, $client_secret, $refresh_token);
 
-    error_log('Zoho client id: ' . $client_id);
-    error_log('Zoho client secret: ' . $client_secret);
-    error_log('Zoho refresh token: ' . $refresh_token);
-    error_log('Zoho access token: ' . $access_token);
-    error_log('Zoho list key: ' . $list_key);
+    // error_log('Zoho client id: ' . $client_id);
+    // error_log('Zoho client secret: ' . $client_secret);
+    // error_log('Zoho refresh token: ' . $refresh_token);
+    // error_log('Zoho access token: ' . $access_token);
+    // error_log('Zoho list key: ' . $list_key);
 
 	if (!$access_token) {
 		error_log('Zoho: No se pudo obtener access token');
@@ -79,7 +88,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	);
 
 	$response = wp_remote_post($api_url, $args);
-	error_log('Zoho response: ' . print_r($response, true));
+	// error_log('Zoho response: ' . print_r($response, true));
 	$body = wp_remote_retrieve_body($response);
 	error_log('Zoho body: ' . $body);
 }
