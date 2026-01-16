@@ -50,11 +50,11 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 
 	$payload = array(
 		'listkey' => $list_key,
-		'contactinfo' => array(
+		'contactinfo' => json_encode(array(
 			'First Name' => $first_name,
 			'Email' => $email,
 			'Country' => $country
-		),
+		)),
 		'resfmt' => 'JSON'
 	);
 
