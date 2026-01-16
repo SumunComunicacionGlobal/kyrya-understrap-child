@@ -1072,6 +1072,13 @@ function get_slider_destacados() {
 
 
 function info_basica_privacidad() {
+
+    if ( current_user_can( 'manage_options' ) ) {
+        return;
+    }
+
+      ?>
+      <?php
     // global $post;
       $privacidad_page_id = apply_filters( 'wpml_object_id', 111, 'page' );
       $privacidad_page = get_post( $privacidad_page_id );
