@@ -80,38 +80,41 @@ $container   = get_theme_mod( 'understrap_container_type' );
 								    $terms = get_terms($tax);
 
 									foreach ( $terms as $term ) {
-										$q = new WP_Query( array(
-											'post_type' 		=> $pt->name,
-											'posts_per_page' 	=> -1,
-											// 'orderby'			=> 'name',
-											// 'order'				=> 'asc',
-											'tax_query' => array(
-												array(
-													'taxonomy' => $tax,
-													'field' => 'id',
-													'terms' => array( $term->term_id ),
-													'operator' => 'IN'
+										// Asegúrate de que $term es un objeto
+										if ( is_object($term) && isset($term->term_id) ) {
+											$q = new WP_Query( array(
+												'post_type' 		=> $pt->name,
+												'posts_per_page' 	=> -1,
+												// 'orderby'			=> 'name',
+												// 'order'				=> 'asc',
+												'tax_query' => array(
+													array(
+														'taxonomy' => $tax,
+														'field' => 'id',
+														'terms' => array( $term->term_id ),
+														'operator' => 'IN'
+													)
 												)
-											)
-										) );
+											) );
 
-										if ( $q->have_posts() ) : 
-											echo '<h6 id="'.$pt->name.'">'.$term->name.'</h6>';
+											if ( $q->have_posts() ) : 
+												echo '<h6 id="'.$pt->name.'">'.$term->name.'</h6>';
 
-											echo '<ul class="mb-4">';
-											while ( $q->have_posts() ) : 
-												$q->the_post();
-												// if (is_user_logged_in()) {
-												// 	echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a><br>'.$post->post_content.'<br>'.$post->post_excerpt.'<br><br>';
-												// } else {
-													echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
+												echo '<ul class="mb-4">';
+												while ( $q->have_posts() ) : 
+													$q->the_post();
+													// if (is_user_logged_in()) {
+													// 	echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a><br>'.$post->post_content.'<br>'.$post->post_excerpt.'<br><br>';
+													// } else {
+														echo '<li><a href="'.get_permalink().'">'.get_the_title().'</a></li>';
 
-												// }
-											endwhile; 
-											echo '</ul>';
-										endif;
-										$q = null;
-										wp_reset_postdata();
+													// }
+												endwhile; 
+												echo '</ul>';
+											endif;
+											$q = null;
+											wp_reset_postdata();
+										}
 									}
 								} else {
 									$q = new WP_Query( array(
