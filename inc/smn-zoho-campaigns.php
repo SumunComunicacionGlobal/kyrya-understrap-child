@@ -14,8 +14,15 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
         return;
     }
     $data = $submission->get_posted_data();
+	$current_lang = defined('ICL_LANGUAGE_CODE') ? ICL_LANGUAGE_CODE : 'en';
 
-	$target_form_id = 57056;
+	$target_form_id = 57056; // Formulario newsletter
+	$target_form_id_contacto = 57061; // Formulario contacto
+
+	$list_key = get_field('zoho_campaigns_list_key', 'option');
+	$source_name = 'Formulario newsletter';
+	$acceptance_field_name = 'optin';
+
     
 	// Obtener todas las traducciones del formulario con WPML
 	if (function_exists('wpml_object_id_filter')) {
@@ -33,6 +40,10 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	$is_target_form = in_array($current_form_id, $form_ids);
 
 	if (!$is_target_form) {
+		$list_key = get_field('zoho_campaigns_list_key_query_form', 'option');
+		$source_name = 'Formulario de contacto';
+		$acceptance_field_name = 'aceptacion';
+
 	    // Solo enviar si tiene optin y está marcado
 	    if (!empty($data['optin'])) {
             error_log('Zoho: El formulario no es el objetivo, pero tiene opt-in marcado.');
@@ -42,13 +53,22 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	    }
 	}
 
-    $source_name = 'Formularios web - ' . $contact_form->title();
     error_log('Zoho: Enviando lead desde el formulario: ' . $source_name);
+
+	$optin_value = isset($data[$acceptance_field_name]) ? $data[$acceptance_field_name] : '';
+	if (!empty($optin_value)) {
+		$optin_value = 'Sí';
+	} else {
+		$optin_value = 'No';
+		return;
+	}
 
 	$first_name = isset($data['your-name']) ? $data['your-name'] : '';
 	$email = isset($data['your-email']) ? $data['your-email'] : '';
 
     // Construir el array contactinfo
+	// https://www.zoho.com/campaigns/help/developers/get-contact-fields.html
+	// Contact Email, First Name, Last Name, Phone, Mobile, Secondary Email, Company Name, Job Title, Address, City, State, Country, Zip Code, Website Note, Twitter Handle, Facebook Handle, LinkedIn Handle
     $contact_info = array(
         'First Name' => $first_name,
         'Contact Email' => $email,
@@ -59,33 +79,43 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	    $country = isset($data['your-country-subscription-form']) ? $data['your-country-subscription-form'] : '';
     } else {
         $country = isset($data['your-country']) ? $data['your-country'] : '';
+	}
 
-        if ( isset($data['your-phone']) && !empty($data['your-phone']) ) {
-            $contact_info['Phone'] = $data['your-phone'];
-        }
-        if (isset($data['your-profile']) && !empty($data['your-profile'])) {
-            $job_title = $data['your-profile'];
-            // remove [" and "] if present
-            // $job_title = str_replace(array('["', '"]'), '', $job_title);
-            $job_title = implode(', ', $job_title);
-            $contact_info['Job Title'] = $job_title;
-        }
-        if (isset($data['your-company']) && !empty($data['your-company'])) {
-            $contact_info['Company Name'] = $data['your-company'];
-        }
-        if (isset($data['your-city']) && !empty($data['your-city'])) {
-            $contact_info['City'] = $data['your-city'];
-        }
-        if (isset($data['your-message']) && !empty($data['your-message'])) {
-            $contact_info['Note'] = $data['your-message'];
-        }
-
-    }
+	if (isset($data['your-last-name']) && !empty($data['your-last-name'])) {
+		$contact_info['Last Name'] = $data['your-last-name'];
+	}
+	if ( isset($data['your-phone']) && !empty($data['your-phone']) ) {
+		$contact_info['Phone'] = $data['your-phone'];
+	}
+	if (isset($data['your-profile']) && !empty($data['your-profile'])) {
+		$job_title = $data['your-profile'];
+		$job_title = implode(', ', $job_title);
+		$contact_info['Job Title'] = $job_title;
+	}
+	if (isset($data['your-company']) && !empty($data['your-company'])) {
+		$contact_info['Company Name'] = $data['your-company'];
+	}
+	if (isset($data['your-city']) && !empty($data['your-city'])) {
+		$contact_info['City'] = $data['your-city'];
+	}
+	if (isset($data['your-state']) && !empty($data['your-state'])) {
+		$contact_info['State'] = $data['your-state'];
+	}	
+	if (isset($data['your-query-type']) && !empty($data['your-query-type'])) {
+		$contact_info['Tipo de Consulta'] = is_array($data['your-query-type']) ? implode(', ', $data['your-query-type']) : $data['your-query-type'];
+	}
+	if (isset($data['your-message']) && !empty($data['your-message'])) {
+		$contact_info['Note'] = $data['your-message'];
+	}
 
     $contact_info['Country'] = $country;
 
+	$contact_info['Idioma'] = $current_lang;
+	$contact_info['Consentimiento Suscripcion'] = $optin_value;
+	$contact_info['Fecha Ultimo Consentimiento'] = current_time('Y-m-d H:i:s');
+
+
 	$api_url = 'https://campaigns.zoho.eu/api/v1.1/json/listsubscribe';
-	$list_key = get_field('zoho_campaigns_list_key', 'option');
 
 	// OAuth 2.0: obtener access token usando auth code (debes guardar el refresh_token, client_id y client_secret en las opciones del tema)
 	$client_id = get_field('zoho_campaigns_client_id', 'option');
