@@ -161,9 +161,12 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
  */
 function smn_zoho_get_access_token($client_id, $client_secret, $refresh_token) {
 	$transient_key = 'zoho_campaigns_access_token';
-	$access_token = get_transient($transient_key);
-	if ($access_token) {
-		return $access_token;
+	$token_data = get_transient($transient_key);
+	if ($token_data && is_array($token_data)) {
+		// Comprobar si el token sigue siendo válido
+		if (isset($token_data['access_token'], $token_data['expires_at']) && $token_data['expires_at'] > time() + 60) { // margen de 1 min
+			return $token_data['access_token'];
+		}
 	}
 	$token_url = 'https://accounts.zoho.eu/oauth/v2/token';
 	$params = array(
@@ -182,7 +185,14 @@ function smn_zoho_get_access_token($client_id, $client_secret, $refresh_token) {
 	}
 	$body = json_decode(wp_remote_retrieve_body($response), true);
 	if (isset($body['access_token'])) {
-		set_transient($transient_key, $body['access_token'], 3300); // 55 min
+		// Calcular expiración real
+		$expires_in = isset($body['expires_in']) ? intval($body['expires_in']) : 3600; // por defecto 1h
+		$expires_at = time() + $expires_in;
+		$token_data = array(
+			'access_token' => $body['access_token'],
+			'expires_at' => $expires_at
+		);
+		set_transient($transient_key, $token_data, $expires_in - 300); // margen de 5 min
 		return $body['access_token'];
 	}
 	error_log('Zoho token response: ' . print_r($body, true));
