@@ -88,6 +88,7 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	}
 	if ( isset($data['your-phone']) && !empty($data['your-phone']) ) {
 		$contact_info['Phone'] = $data['your-phone'];
+		$contact_info['Mobile'] = $data['your-mobile'];
 	}
 	if (isset($data['your-profile']) && !empty($data['your-profile'])) {
 		$job_title = $data['your-profile'];
