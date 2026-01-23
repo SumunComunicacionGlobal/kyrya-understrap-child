@@ -43,14 +43,14 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 		$list_key = get_field('zoho_campaigns_list_key_query_form', 'option');
 		$source_name = 'Formulario de contacto';
 		$acceptance_field_name = 'aceptacion';
+	}
 
-	    // Solo enviar si tiene optin y está marcado
-	    if (!empty($data['optin'])) {
-            error_log('Zoho: El formulario no es el objetivo, pero tiene opt-in marcado.');
-        } else {
-	        error_log('Zoho: El formulario no tiene el campo de opt-in marcado.');
-	        return;
-	    }
+	// Solo enviar si tiene optin y está marcado
+	if (!empty($data[$acceptance_field_name])) {
+		error_log('Zoho: El formulario no es el objetivo, pero tiene opt-in marcado.');
+	} else {
+		error_log('Zoho: El formulario no tiene el campo de opt-in marcado.');
+		return;
 	}
 
 	$optin_value = isset($data[$acceptance_field_name]) ? $data[$acceptance_field_name] : '';
