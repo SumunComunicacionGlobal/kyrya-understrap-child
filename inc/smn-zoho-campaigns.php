@@ -53,9 +53,10 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 	    }
 	}
 
-    error_log('Zoho: Enviando lead desde el formulario: ' . $source_name);
-
 	$optin_value = isset($data[$acceptance_field_name]) ? $data[$acceptance_field_name] : '';
+
+	error_log('Zoho: Enviando lead desde el formulario: ' . $source_name . ', opt-in: ' . ($optin_value ? 'Sí' : 'No'));
+
 	if (!empty($optin_value)) {
 		$optin_value = 'Sí';
 	} else {
