@@ -165,7 +165,8 @@ function smn_zoho_get_access_token($client_id, $client_secret, $refresh_token) {
 	if ($token_data && is_array($token_data)) {
 		// Comprobar si el token sigue siendo válido
 		if (isset($token_data['access_token'], $token_data['expires_at']) && $token_data['expires_at'] > time() + 60) { // margen de 1 min
-			return $token_data['access_token'];
+		error_log('Zoho: Usando access token cacheado ' . $token_data['access_token']);	
+		return $token_data['access_token'];
 		}
 	}
 	$token_url = 'https://accounts.zoho.eu/oauth/v2/token';
@@ -193,6 +194,7 @@ function smn_zoho_get_access_token($client_id, $client_secret, $refresh_token) {
 			'expires_at' => $expires_at
 		);
 		set_transient($transient_key, $token_data, $expires_in - 300); // margen de 5 min
+		error_log('Zoho: Nuevo access token obtenido ' . $body['access_token']);
 		return $body['access_token'];
 	}
 	error_log('Zoho token response: ' . print_r($body, true));
