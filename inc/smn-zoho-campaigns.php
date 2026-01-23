@@ -39,10 +39,11 @@ function smn_send_lead_to_zoho_campaigns($contact_form) {
 
 	$is_target_form = in_array($current_form_id, $form_ids);
 
-	if (!$is_target_form) {
+	if ( $is_target_form) {
+		$acceptance_field_name = 'aceptacion';
+	} else {
 		$list_key = get_field('zoho_campaigns_list_key_query_form', 'option');
 		$source_name = 'Formulario de contacto';
-		$acceptance_field_name = 'aceptacion';
 	}
 
 	// Solo enviar si tiene optin y está marcado
